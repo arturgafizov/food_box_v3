@@ -1,4 +1,4 @@
-import re
+from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 import requests
 from django.core.management.base import BaseCommand
@@ -16,7 +16,8 @@ class Command(BaseCommand):
         for user in users:
             recipient = User.objects.filter(id=user['id']).first()
             try:
-                d={}
+                d = {}
+                d['password'] = make_password(user['password'])
                 d['username'] = user['email'].split('@')[0]
                 d['last_name'] = user['info']['surname']
                 d['first_name'] = user['info']['name']
@@ -29,10 +30,3 @@ class Command(BaseCommand):
                 self.stdout.write("User successfully created_or_update")
             except ValidationError:
                 print("Validation Error")
-
-#        if users:
-#            return Response(users)
-#        elif link_user.status_code == 404:
-#            return Response(status=status.HTTP_404_NOT_FOUND)
-#        elif link_user.status_code == 408:
-#            return Response(status=status.HTTP_408_REQUEST_TIMEOUT)

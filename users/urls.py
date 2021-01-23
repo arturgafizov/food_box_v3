@@ -1,7 +1,8 @@
 from django.urls import path
 
-from users.views import user_list
+from users.views import Userlist, user_auth
 
 urlpatterns_users = [
-    path('register/', user_list, name='item_list'), # local item url created
+    path('register/', Userlist.as_view(), name='Userlist'), # local item url created
+    path('auth/', user_auth, name='user_auth'),
 ]

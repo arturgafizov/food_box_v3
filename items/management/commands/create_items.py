@@ -33,15 +33,3 @@ class Command(BaseCommand):
 
             except ValidationError:
                 print("Validation Error")
-            #if item:
-            #    item.save()
-            #    self.stdout.write("Item successfully updated")
-            #if not item:
-            #    new_item = Item.objects.create(
-            #        title=food['title'],
-            #        description=food['description'],
-            #        image='/media/item_images/' + food['image'].split('/')[-1],
-            #        weight=food['weight_grams'],
-            #        price=food['price'])
-
-            #    self.stdout.write("Item successfully created")

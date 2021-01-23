@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-# Create your models here.
+from rest_framework import serializers
+from rest_framework.serializers import UniqueTogetherValidator
+from django.contrib.auth.hashers import make_password
 from rest_framework.serializers import ModelSerializer
 
 
@@ -12,6 +13,14 @@ class User(AbstractUser):
 
 
 class UserSerializer(ModelSerializer):
+    first_name = models.CharField(max_length=200)
+#    password =
     class Meta:
         model = User
         fields = '__all__'
+        validators = [
+            serializers.UniqueTogetherValidator(
+                queryset=User.objects.all(),
+                fields=('email',)
+            )
+        ]
