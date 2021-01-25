@@ -11,7 +11,7 @@ class Item(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     image = models.ImageField(upload_to=MEDIA_ITEM_IMAGE_DIR)
-    weight = models.IntegerField()
+    weight = models.PositiveSmallIntegerField()
     price = models.DecimalField(max_digits=13, decimal_places=2)
 
 

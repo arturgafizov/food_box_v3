@@ -6,9 +6,9 @@ from users.models import User
 from reviews.data import STATUS_CHOICES
 
 
-class Rewiew(models.Model):
+class Review(models.Model):
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='rewiews')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(default=timezone.now)

@@ -14,7 +14,7 @@ class User(AbstractUser):
 
 class UserSerializer(ModelSerializer):
     first_name = models.CharField(max_length=200)
-#    password =
+
     class Meta:
         model = User
         fields = '__all__'

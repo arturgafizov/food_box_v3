@@ -7,10 +7,15 @@ from rest_framework.response import Response
 from users.models import User
 from users.models import UserSerializer
 
-class Userlist(CreateAPIView):
+
+class UserList(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
+class UserAuth(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 @api_view(http_method_names=['POST'])

@@ -5,8 +5,9 @@ from items.models import Item
 
 # Create your models here.
 
+
 class Cart(models.Model):
-    items = models.ManyToManyField(Item)
+    items = models.ManyToManyField(to=Item,  through='CartItem')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts')
 
 
@@ -15,3 +16,4 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cartitems')
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=13, decimal_places=2)
+
