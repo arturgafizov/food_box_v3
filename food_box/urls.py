@@ -17,11 +17,19 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 
-from items.urls import urlpatterns_items
+# from items.urls import urlpatterns_items
 from users.urls import urlpatterns_users
+from items.urls import urlpatterns_items
+from items.views import Itemlist
+
+api_url = [
+    path('items/', include(urlpatterns_items)),
+    path('items/', Itemlist.as_view(), name='Itemlist'),
+]
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(urlpatterns_users)),
-    path('api/v1/', include(urlpatterns_items)),
+    path('api/v1/', include(api_url)),
 ]

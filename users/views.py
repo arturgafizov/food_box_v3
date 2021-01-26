@@ -6,25 +6,21 @@ from rest_framework.response import Response
 
 from users.models import User
 from users.models import UserSerializer
-
+from users.models import UserAuthSerializer
 
 class UserList(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class UserAuth(CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 
 @api_view(http_method_names=['POST'])
 def user_auth(request):
 
     if request.user.is_authenticated:
-        serializer = UserSerializer(data=request.data)
+        serializer = UserAuthSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

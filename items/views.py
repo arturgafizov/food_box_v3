@@ -39,7 +39,7 @@ def item_detail(request, pk):
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
 
 
-class Itemlist(ListCreateAPIView):
+class ItemList(ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter, ]
@@ -48,6 +48,6 @@ class Itemlist(ListCreateAPIView):
     ordering = ['price']
 
 
-class Itemretrieve(RetrieveUpdateDestroyAPIView):
+class ItemRetrieve(RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer

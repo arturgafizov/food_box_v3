@@ -24,3 +24,11 @@ class UserSerializer(ModelSerializer):
                 fields=('email',)
             )
         ]
+
+
+class UserAuthSerializer(ModelSerializer):
+    first_name = models.CharField(max_length=200)
+
+    class Meta:
+        model = User
+        fields = ('email', 'password')
