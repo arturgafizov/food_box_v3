@@ -1,7 +1,8 @@
-from items.views import Itemretrieve
 from django.urls import path
 
-urlpatterns_items = [
-    path('<int:pk>/', Itemretrieve.as_view(), name='Itemretrieve'),
+from items.views import ItemRetrieve, ItemList
 
+urlpatterns_items = [
+    path('<int:pk>/', ItemRetrieve.as_view(), name='Itemretrieve'),
+    path('', ItemList.as_view(), name='Itemlist'),
 ]

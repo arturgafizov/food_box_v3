@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 from reviews.models import Review
 
+
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         link_review = requests.get('https://raw.githubusercontent.com/stepik-a-w/drf-project-boxes/master/reviews.json')
@@ -14,7 +15,7 @@ class Command(BaseCommand):
         # print(reviews)
         for review in reviews:
             try:
-                # customer_review = Rewiew.objects.filter(id=review['id']).first()
+                # customer_review = Review.objects.filter(id=review['id']).first()
                 d = {'text': review['content'],
                      'created_at': review['created_at'],
                      'published_at': review['published_at'],

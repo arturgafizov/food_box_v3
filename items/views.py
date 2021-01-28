@@ -6,12 +6,11 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import get_object_or_404, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet, ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 
 from items.models import Item
 from items.models import ItemSerializer
-
+from items.filters import ItemFilter
 
 # Create your views here.
 @api_view(http_method_names=['GET'])
@@ -42,8 +41,8 @@ def item_detail(request, pk):
 class ItemList(ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter, ]
-    filterset_fields = ['price']
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+    filterset_class = ItemFilter
     search_fields = ['price', 'title']
     ordering = ['price']
 

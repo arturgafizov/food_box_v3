@@ -13,18 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
+from drf_yasg import openapi
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
 
-# from items.urls import urlpatterns_items
 from users.urls import urlpatterns_users
 from items.urls import urlpatterns_items
-from items.views import Itemlist
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='Stepic DRF API',
+        default_version='v1',
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 api_url = [
     path('items/', include(urlpatterns_items)),
-    path('items/', Itemlist.as_view(), name='Itemlist'),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0)),  # noqa
 ]
 
 
@@ -33,3 +43,4 @@ urlpatterns = [
     path('api/v1/', include(urlpatterns_users)),
     path('api/v1/', include(api_url)),
 ]
+
