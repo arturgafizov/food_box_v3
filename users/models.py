@@ -17,14 +17,13 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username', 'password', 'email', 'first_name', 'last_name',)
         validators = [
             serializers.UniqueTogetherValidator(
                 queryset=User.objects.all(),
                 fields=('email',)
             )
         ]
-
 
 # class UserAuthSerializer(ModelSerializer):
 #     first_name = models.CharField(max_length=200)

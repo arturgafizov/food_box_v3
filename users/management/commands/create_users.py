@@ -4,6 +4,7 @@ import requests
 from django.core.management.base import BaseCommand
 from rest_framework import status, response
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 from users.models import User
 
@@ -17,6 +18,8 @@ class Command(BaseCommand):
 
         for user in users:
             recipient = User.objects.filter(id=user['id']).first()
+            # token = Token.objects.create(user=user['username'])
+            # print(token.key)
             try:
                 d = {'password': make_password(user['password']),
                      'username': user['email'].split('@')[0],
