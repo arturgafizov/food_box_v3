@@ -22,6 +22,7 @@ from drf_yasg.views import get_schema_view
 
 from users.urls import urlpatterns_users
 from items.urls import urlpatterns_items
+from carts.urls import urlpatterns_carts
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -33,14 +34,16 @@ schema_view = get_schema_view(
 )
 
 api_url = [
+    path('carts/', include(urlpatterns_carts)),
     path('items/', include(urlpatterns_items)),
+    path('users/', include(urlpatterns_users)),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0)),  # noqa
+
 ]
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(urlpatterns_users)),
     path('api/v1/', include(api_url)),
 ]
 

@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import get_object_or_404, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import get_object_or_404, ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -38,7 +38,7 @@ def item_detail(request, pk):
         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
 
 
-class ItemList(ListCreateAPIView):
+class ItemList(ListAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)

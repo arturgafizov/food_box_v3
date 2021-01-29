@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework.serializers import ModelSerializer
 
 from users.models import User
 from items.models import Item
@@ -17,3 +18,17 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=13, decimal_places=2)
 
+
+class CartSerializer(ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ('items', 'user')
+
+
+class CartItemSerializer(ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ('item', 'cart', 'quantity', 'price', 'item_id',)
+        extra_kwargs = {
+            'price': {'read_only': True}
+        }

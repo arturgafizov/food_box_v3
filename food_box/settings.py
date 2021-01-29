@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2(m1es7fuevkx$ui3t#f4k4naboann529_rz=oxq1y!zc9_5*i'
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'rest_framework.authtoken',
+    'corsheaders',
     'items',
     'reviews',
     'users',
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -138,6 +143,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
                                        ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
