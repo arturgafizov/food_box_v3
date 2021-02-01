@@ -1,7 +1,6 @@
-from _decimal import Decimal
+from decimal import Decimal
 
 from django.db import models
-from rest_framework import serializers
 
 
 from users.models import User
@@ -17,7 +16,7 @@ class Cart(models.Model):
     total_cost = models.DecimalField(max_digits=13, decimal_places=2, default=True)
 
     @property
-    def get_total_cost(self,):
+    def total_cost(self,):
         return self.carts.price * Decimal(self.carts.quantity)
 
 
@@ -30,9 +29,5 @@ class CartItem(models.Model):
     total_price = models.DecimalField(max_digits=13, decimal_places=2, default=True)
 
     @property
-    def get_total_price(self):
+    def total_price(self):
         return self.price * Decimal(self.quantity)
-
-
-
-

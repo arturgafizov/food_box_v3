@@ -38,6 +38,9 @@ class UserCurrentSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name', 'middle_name', 'phone_number', 'address')
-
+        extra_kwargs = {
+            'phone_number': {'required': False},
+            'middle_name': {'required': False},
+        }
 
 

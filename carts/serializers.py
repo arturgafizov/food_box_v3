@@ -16,12 +16,12 @@ class CartItemSerializer(ModelSerializer):
         extra_kwargs = {
             'price': {'read_only': True},
             'total_price': {'read_only': True},
+            'quantity': {'required': False},
         }
 
 
 class CartSerializer(ModelSerializer):
     items = CartItemSerializer(many=True, read_only=False)
-
 
     class Meta:
         model = Cart
