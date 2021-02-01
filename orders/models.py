@@ -5,6 +5,7 @@ from users.models import User
 from carts.models import Cart
 from reviews.data import STATUS_ORDER_CHOICES
 
+
 class Order(models.Model):
     created_at = models.DateTimeField()
     delivery_at = models.DateTimeField()

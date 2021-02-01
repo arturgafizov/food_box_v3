@@ -13,29 +13,29 @@ from items.models import ItemSerializer
 from items.filters import ItemFilter
 
 # Create your views here.
-@api_view(http_method_names=['GET'])
-def item_detail(request, pk):
-    link_item = requests.get('https://raw.githubusercontent.com/stepik-a-w/drf-project-boxes/master/foodboxes.json')
-    items = link_item.json()
-    d = {}
-    response = None
-
-    for item in items:
-        if item['id'] == pk:
-            d['id'] = item['id']
-            d['title'] = item['title']
-            d['description'] = item['description']
-            d['image'] = '/media/item_images/' + item['image'].split('/')[-1]
-            d['weight'] = item['weight_grams']
-            d['price'] = item['price']
-            response = d
-
-    if response:
-        return Response(response)
-    elif link_item.status_code == 404:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    elif link_item.status_code == 408:
-        return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
+# @api_view(http_method_names=['GET'])
+# def item_detail(request, pk):
+#     link_item = requests.get('https://raw.githubusercontent.com/stepik-a-w/drf-project-boxes/master/foodboxes.json')
+#     items = link_item.json()
+#     d = {}
+#     response = None
+#
+#     for item in items:
+#         if item['id'] == pk:
+#             d['id'] = item['id']
+#             d['title'] = item['title']
+#             d['description'] = item['description']
+#             d['image'] = '/media/item_images/' + item['image'].split('/')[-1]
+#             d['weight'] = item['weight_grams']
+#             d['price'] = item['price']
+#             response = d
+#
+#     if response:
+#         return Response(response)
+#     elif link_item.status_code == 404:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+#     elif link_item.status_code == 408:
+#         return Response(status=status.HTTP_408_REQUEST_TIMEOUT)
 
 
 class ItemList(ListAPIView):
@@ -50,3 +50,16 @@ class ItemList(ListAPIView):
 class ItemRetrieve(RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+
+
+# @api_view(http_method_names=['GET'])
+# def get_item_view(request, pk):
+#     item = Item.objects.get(id=pk)
+#
+#     return Response({
+#         'id': item.id,
+#         'title': item.title,
+#         'description': item.description,
+#         'weight': item.weight,
+#         'price': item.price,
+#     })

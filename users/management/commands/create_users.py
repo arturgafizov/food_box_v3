@@ -14,7 +14,7 @@ class Command(BaseCommand):
         link_user = requests.get(
             'https://raw.githubusercontent.com/stepik-a-w/drf-project-boxes/master/recipients.json')
         users = link_user.json()
-        print(users)
+        # print(users)
 
         for user in users:
             recipient = User.objects.filter(id=user['id']).first()
