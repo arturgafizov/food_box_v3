@@ -1,3 +1,4 @@
+from rest_framework.routers import DefaultRouter
 from django.urls import path
 
 from carts.views import CartItemList, CartRetrieve, CartList
@@ -7,3 +8,4 @@ urlpatterns_carts = [
     path('items/', CartItemList.as_view(), name='CartItemList'),
     path('items/<int:pk>/', CartRetrieve.as_view(), name='CartRetrieve'),
 ]
+

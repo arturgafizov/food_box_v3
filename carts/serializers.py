@@ -1,14 +1,12 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 
 from carts.models import Cart, CartItem
 from items.models import ItemSerializer
 
 
 class CartItemSerializer(ModelSerializer):
-    # total_price = serializers.SerializerMethodField()
     item = ItemSerializer()
-    # def get_total_price(self, cart_item_instance):
-    #     return cart_item_instance.a + cart_item_instance.b
 
     class Meta:
         model = CartItem
@@ -20,12 +18,25 @@ class CartItemSerializer(ModelSerializer):
         }
 
 
+# class CartSerializer(ModelSerializer):
+#     items = CartItemSerializer(many=True, read_only=False)
+#
+#     class Meta:
+#         model = Cart
+#         fields = ('id', 'items', 'total_cost')
+#         extra_kwargs = {
+#             'total_cost': {'read_only': True},
+#         }
+
+
 class CartSerializer(ModelSerializer):
     items = CartItemSerializer(many=True, read_only=False)
+    # url = serializers.HyperlinkedIdentityField(
+    #     view_name='carts:user-detail',
+    #     lookup_field='user',
+    #     format='html'
+    # )
 
     class Meta:
         model = Cart
-        fields = ('id', 'items', 'total_cost')
-        extra_kwargs = {
-            'total_cost': {'read_only': True},
-        }
+        fields = ('id', 'total_cost', 'items')

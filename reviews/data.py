@@ -1,7 +1,7 @@
 STATUS_CHOICES = (
-        ('new', ' На модерации'),
+        ('moderation', ' На модерации'),
         ('published', 'Опубликован'),
-        ('hidden', 'Скрыт'),
+        ('rejected', 'Отклоненный'),
     )
 
 STATUS_ORDER_CHOICES = (

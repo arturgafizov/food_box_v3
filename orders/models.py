@@ -13,3 +13,4 @@ class Order(models.Model):
     address = models.CharField(max_length=256)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='orders')
     status = models.CharField(max_length=50, choices=STATUS_ORDER_CHOICES)
+    total_cost = models.DecimalField(max_digits=13, decimal_places=2, default=True)
