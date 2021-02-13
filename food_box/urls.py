@@ -24,6 +24,7 @@ from users.urls import urlpatterns_users
 from items.urls import urlpatterns_items
 from carts.urls import urlpatterns_carts
 from orders.urls import urlpatterns_orders
+from reviews.urls import urlpatterns_reviews
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -40,6 +41,7 @@ api_url = [
     path('users/', include(urlpatterns_users)),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0)),  # noqa
     path('orders/', include(urlpatterns_orders)),
+    path('reviews/', include(urlpatterns_reviews)),
 ]
 
 

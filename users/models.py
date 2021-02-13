@@ -41,6 +41,6 @@ class UserCurrentSerializer(ModelSerializer):
         extra_kwargs = {
             'phone_number': {'required': False},
             'middle_name': {'required': False},
+            'username': {'read_only': True},
         }
-
 
