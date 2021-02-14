@@ -18,7 +18,11 @@ class OrderSerializer(ModelSerializer):
             'created_at': {'read_only': True},
         }
 
-    # def validate_address(self, value):
-    #     if self.instance and value != self.instance.address:
-    #         raise serializers.ValidationError('Something wrong with this field')
-    #     return value
+
+class OrderUpdateSerializer(ModelSerializer):
+    cart = CartSerializer()
+
+    class Meta:
+        model = Order
+        fields = ('cart', 'status', 'address', 'delivery_at')
+

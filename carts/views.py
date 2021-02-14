@@ -5,11 +5,13 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from carts.serializers import CartSerializer, CartItemSerializer
 from carts.models import Cart, CartItem
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.authentication import TokenAuthentication
 
 
 class CartList(ListAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    authentication_classes = (TokenAuthentication, )
     # permission_classes = permissions.IsAuthenticated
     # lookup_field = 'user_id'
     # lookup_url_kwarg = 'user'
@@ -36,3 +38,4 @@ class CartItemList(ListCreateAPIView):
 class CartRetrieve(RetrieveUpdateDestroyAPIView):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+    authentication_classes = (TokenAuthentication, )

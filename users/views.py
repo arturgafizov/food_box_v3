@@ -22,6 +22,7 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
+from rest_framework.authentication import TokenAuthentication
 
 from users.models import User
 from users.models import UserSerializer, UserCurrentSerializer
@@ -33,12 +34,13 @@ from users.models import UserSerializer, UserCurrentSerializer
 class UserList(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    authentication_classes = (TokenAuthentication, )
 
 
 class UserRegisterViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+    authentication_classes = (TokenAuthentication, )
 
 # @ csrf_exempt
 # @api_view(["POST"])
@@ -65,6 +67,7 @@ class UserRegisterViewSet(ModelViewSet):
 
 class CurrentUserRetrieveUpdateView(RetrieveUpdateAPIView):
     serializer_class = UserCurrentSerializer
+    authentication_classes = (TokenAuthentication, )
 
     def get_object(self):
         return self.request.user
