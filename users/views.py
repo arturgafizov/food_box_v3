@@ -35,13 +35,14 @@ class UserList(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = (TokenAuthentication, )
+    permission_classes = [IsAuthenticated]
 
 
 class UserRegisterViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = (TokenAuthentication, )
-
+    permission_classes = [IsAuthenticated]
 # @ csrf_exempt
 # @api_view(["POST"])
 # @permission_classes((AllowAny,))
@@ -67,7 +68,8 @@ class UserRegisterViewSet(ModelViewSet):
 
 class CurrentUserRetrieveUpdateView(RetrieveUpdateAPIView):
     serializer_class = UserCurrentSerializer
-    authentication_classes = (TokenAuthentication, )
+    # authentication_classes = (TokenAuthentication, )
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         return self.request.user

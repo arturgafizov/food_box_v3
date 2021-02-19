@@ -41,7 +41,7 @@ api_url = [
     path('users/', include(urlpatterns_users)),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0)),  # noqa
     path('orders/', include(urlpatterns_orders)),
-    path('reviews/', include(urlpatterns_reviews)),
+    path('reviews/', include((urlpatterns_reviews, 'reviews'), namespace='reviews')),
 ]
 
 

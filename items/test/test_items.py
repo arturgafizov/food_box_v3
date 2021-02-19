@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 from items.models import Item
 
 
-class ItemViewSetListTestCase(APITestCase):
+class ItemListTestCase(APITestCase):
     def setUp(self) -> None:
         self.items = [
             Item.objects.create(title=f'title {b}', description=f'description {b}', image=None,
@@ -24,9 +24,6 @@ class ItemViewSetListTestCase(APITestCase):
             'weight': '2000',
             'price': "200,00",
         }
-
-    # def test_unauthorized(self):
-    #     return
 
     def test(self):
         response = self.client.get(self.url)

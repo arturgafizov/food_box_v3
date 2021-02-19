@@ -12,13 +12,13 @@ class CartList(ListAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
     authentication_classes = (TokenAuthentication, )
-    # permission_classes = permissions.IsAuthenticated
+    permission_classes = permissions.IsAuthenticated
     # lookup_field = 'user_id'
     # lookup_url_kwarg = 'user'
 
     def get_queryset(self):
         user = self.request.user
-        return Cart.objects.filter(cart=user)
+        return Cart.objects.filter(user=user)
         # return super(CartListViewSet, self).get_object()
 
     # def get_object(self):
@@ -39,3 +39,4 @@ class CartRetrieve(RetrieveUpdateDestroyAPIView):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
     authentication_classes = (TokenAuthentication, )
+    permission_classes = permissions.IsAuthenticated

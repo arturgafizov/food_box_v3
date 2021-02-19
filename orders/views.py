@@ -6,6 +6,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
 
 from orders.models import Order
 from orders.serializers import OrderSerializer, OrderUpdateSerializer
@@ -21,7 +23,8 @@ class OrderList(ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     pagination_class = OrderLimitOffsetPagination
-    authentication_classes = (TokenAuthentication, )
+    # authentication_classes = (TokenAuthentication, )
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -31,4 +34,5 @@ class OrderList(ListCreateAPIView):
 class OrderRetrieve(RetrieveUpdateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderUpdateSerializer
-    authentication_classes = (TokenAuthentication, )
+    # authentication_classes = (TokenAuthentication, )
+    permission_classes = permissions.IsAuthenticated
